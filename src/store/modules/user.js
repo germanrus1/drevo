@@ -24,6 +24,18 @@ const actions = {
         dispatch(AUTH_LOGOUT);
       });
   },
+  // [USER_PROFILE]: ({ commit, dispatch }) => {
+  //   commit(USER_PROFILE);
+  //   apiCall({ url: "user/me" })
+  //     .then(resp => {
+  //       commit(USER_SUCCESS, resp);
+  //     })
+  //     .catch(() => {
+  //       commit(USER_ERROR);
+  //       // if resp is unauthorized, logout, to
+  //       dispatch(AUTH_LOGOUT);
+  //     });
+  // },
 };
 
 const mutations = {

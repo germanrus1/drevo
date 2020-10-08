@@ -26,8 +26,7 @@ const actions = {
       commit(AUTH_REQUEST)
       axios({url: urlAuth, data: user, method: 'POST' })
         .then(resp => {
-          const token = resp.data.access_token;
-          console.log(token);
+          const token = resp.data.token_type + ' ' + resp.data.access_token;
           localStorage.setItem('user-token', token);
           // Add the following line:
           axios.defaults.headers.common['Authorization'] = token;
