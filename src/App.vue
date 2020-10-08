@@ -1,30 +1,28 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <Index msg="Welcome to Your Vue.js App"/>
+    <keep-alive>
+      <router-view>
+      </router-view>
+    </keep-alive>
+
   </div>
 </template>
 
 <script>
-import Index from './components/Index.vue'
+import { USER_REQUEST } from "./store/actions/user";
 
 export default {
   name: 'App',
   components: {
-    Index
+    // Index,
+  },
+  created: function() {
+    if (this.$store.getters.isAuthenticated) {
+      this.$store.dispatch(USER_REQUEST);
+    }
   }
 }
 </script>
 
 <style>
-  /*@import 'node_modules/bootstrap/scss/bootstrap';*/
-  /*@import 'node_modules/bootstrap-vue/src/index.scss';*/
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
