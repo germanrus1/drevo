@@ -1,17 +1,23 @@
 <template>
   <div id="app">
-    <Index />
+      <Header/>
+        <Content/>
+      <Footer/>
   </div>
 </template>
 
 <script>
 import { USER_REQUEST } from "./store/actions/user";
-import Index from "./components/Index";
+import Header from "./components/common/Header";
+import Footer from "./components/common/Footer";
+import Content from "./components/common/Content";
 
 export default {
   name: 'App',
   components: {
-    Index,
+    Header,
+    Footer,
+    Content,
   },
   created: function() {
     if (this.$store.getters.isAuthenticated) {

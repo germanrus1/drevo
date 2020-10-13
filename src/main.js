@@ -20,7 +20,6 @@ if (token) {
 new Vue({
   render: h => h(App),
   router,
-  headerText: 'Главная',
   store,
 }).$mount('#app')
 

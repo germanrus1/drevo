@@ -1,7 +1,7 @@
 <template>
-  <b-navbar toggleable="sm" type="light" variant="info">
+  <b-navbar toggleable="sm" type="dark" variant="info">
     <b-navbar-brand href="#">
-      <router-link :to="{name: 'main'}">DREVO</router-link>
+      <router-link :to="{name: 'main'}">DREVO - ЗАГЛУШКА!!!!</router-link>
     </b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -31,8 +31,7 @@
 <script>
   import 'bootstrap/dist/css/bootstrap.css'
   import 'bootstrap-vue/dist/bootstrap-vue.css'
-  import {AUTH_LOGOUT} from "../store/actions/auth";
-  import axios from "axios";
+  import {AUTH_LOGOUT} from "../../../store/actions/auth";
 
   export default {
     data() {
@@ -54,25 +53,8 @@
                   this.$router.push('/')
                 })
       },
-
-      getUser: function() {
-        axios({url: 'http://derevo.log/api/' + 'main/', data: {}, method: 'get' })
-                .then(resp => {
-                  let user = this.user;
-                  let data = resp.data.data;
-                  user.email = data.email;
-                  user.last_name = data.last_name;
-                  user.name = data.name;
-                  user.id = data.id;
-                })
-                .catch(err => {
-                  console.log('Ошибка при получении данных пользователя');
-                  console.log(err);
-                })
-      },
     },
     created() {
-      this.getUser();
     }
   }
 </script>

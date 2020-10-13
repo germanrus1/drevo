@@ -1,7 +1,5 @@
 <template>
   <div>
-    <h1>Профиль</h1>
-    Тесто
   </div>
 </template>
 

@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '../store/index'
-import Main from '../components/Main'
-import Profile from '../components/Profile'
+import Home from '../components/common/Home'
+import Index from '../components/common/Index'
+import Profile from '../components/common/Profile'
 
 Vue.use(Router);
 
@@ -27,8 +28,14 @@ let router = new Router({
   routes: [
     {
       path: '/',
-      name: 'main',
-      component: Main,
+      name: 'home',
+      component: Index,
+    },
+    {
+      path: '/home/',
+      name: 'home',
+      component: Home,
+      beforeEnter: ifAuthenticated,
     },
     {
       path: '/profile/',
