@@ -43,6 +43,8 @@
         email: '',
         password: '',
       },
+      username: '',
+      password: '',
     }
   },
   methods: {

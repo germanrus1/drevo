@@ -1,20 +1,17 @@
 <template>
   <div id="app">
-    <keep-alive>
-      <router-view>
-      </router-view>
-    </keep-alive>
-
+    <Index />
   </div>
 </template>
 
 <script>
 import { USER_REQUEST } from "./store/actions/user";
+import Index from "./components/Index";
 
 export default {
   name: 'App',
   components: {
-    // Index,
+    Index,
   },
   created: function() {
     if (this.$store.getters.isAuthenticated) {

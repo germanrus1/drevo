@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '../store/index'
-import Index from '../components/Index'
+import Main from '../components/Main'
 import Profile from '../components/Profile'
 
 Vue.use(Router);
@@ -27,8 +27,8 @@ let router = new Router({
   routes: [
     {
       path: '/',
-      name: 'index',
-      component: Index,
+      name: 'main',
+      component: Main,
     },
     {
       path: '/profile/',

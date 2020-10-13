@@ -12,6 +12,7 @@ Vue.use(IconsPlugin)
 Vue.use(Vuex)
 
 const token = localStorage.getItem('user-token');
+
 if (token) {
   axios.defaults.headers.common['Authorization'] = token
 }
@@ -19,6 +20,7 @@ if (token) {
 new Vue({
   render: h => h(App),
   router,
+  headerText: 'Главная',
   store,
 }).$mount('#app')
 

@@ -6,11 +6,15 @@ import auth from "./modules/auth";
 Vue.use(Vuex);
 
 // const debug = process.env.NODE_ENV !== "production";
+const backendUrl = 'http://derevo.log/api/';
+const headerText = 'Главная';
 
 export default new Vuex.Store({
   modules: {
     user,
-    auth
+    auth,
+    backendUrl,
+    headerText,
   },
   // strict: debug
 });
