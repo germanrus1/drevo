@@ -4,7 +4,7 @@
         <div id="content-wrapper" class="d-flex flex-column">
             <b-navbar toggleable="sm" type="dark" variant="dark">
                 <b-navbar-brand href="#">
-                    <router-link :to="{name: 'main'}">DREVO</router-link>
+                    <router-link :to="{name: 'home'}">DREVO</router-link>
                 </b-navbar-brand>
 
                 <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>

@@ -1,10 +1,10 @@
 <template>
   <div>
-    <Header/>
     <b-container>
       <h1>Главная страница</h1>
         <b-card no-body>
             <b-tabs v-model="tabIndex" card>
+                Удалить БЛОК!
                 <b-tab title="Авторизация" aria-selected="true" :title-link-class="linkClass(0)">
                     <auth/>
                 </b-tab>
@@ -17,7 +17,6 @@
             </b-tabs>
         </b-card>
     </b-container>
-    <Footer/>
   </div>
 </template>
 
@@ -27,8 +26,6 @@
    */
   import 'bootstrap/dist/css/bootstrap.css'
   import 'bootstrap-vue/dist/bootstrap-vue.css'
-  import Header from '../../components/template/main/header'
-  import Footer from '../../components/template/main/footer'
 
   import Register from './Register'
   import Auth from './Authorization'
@@ -37,16 +34,24 @@
 
   export default {
     data() {
-      return {}
+      return {
+        tabIndex: 0
+      }
     },
     components: {
       Register,
       Auth,
       UserList,
-      Header,
-      Footer,
     },
-    methods: {},
+    methods: {
+      linkClass(idx) {
+        if (this.tabIndex === idx) {
+          return ['bg-primary', 'text-light']
+        } else {
+          return ['bg-light', 'text-info']
+        }
+      },
+    },
   }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->

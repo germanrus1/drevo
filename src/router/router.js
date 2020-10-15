@@ -4,10 +4,10 @@ import store from '../store/index'
 import Home from '../components/common/Home'
 import Index from '../components/common/Index'
 import Profile from '../components/common/Profile'
+import RegAuth from "../components/common/RegAuth";
 
 Vue.use(Router);
 
-//При авторизации
 const ifNotAuthenticated = (to, from, next) => {
   if (!store.getters.isAuthenticated) {
     next()
@@ -32,6 +32,12 @@ let router = new Router({
       component: Index,
     },
     {
+      path: '/auth/',
+      name: 'auth',
+      component: RegAuth,
+      beforeEnter: ifNotAuthenticated,
+    },
+    {
       path: '/home/',
       name: 'home',
       component: Home,
@@ -43,12 +49,6 @@ let router = new Router({
       component: Profile,
       beforeEnter: ifAuthenticated,
     },
-    {
-      path: '/test/',
-      name: 'profile',
-      component: Profile,
-      beforeEnter: ifNotAuthenticated,
-    }
   ]
 })
 
