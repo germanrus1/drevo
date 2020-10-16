@@ -16,18 +16,23 @@ export default new Vuex.Store({
   },
   // Возможно нужно вынести в отдельный модуль
   state: {
-    headerText: 'Заголовок страницы',
+    pageTitle: 'Заголовок страницы',
   },
   mutations: {
-    setHeaderText(state, title = '') {
+    changeHeaderText(state, title = 'Пустой заголовок') {
       console.log(title);
-      state.headerText = title;
+      state.pageTitle = title;
     }
   },
   getters: {
-    getHeaderText: state => {
-      return state.headerText;
+    getPageTitle: state => {
+      return state.pageTitle;
     }
-  }
+  },
+  actions: {
+    changeHeaderText({commit}, title){
+      commit('changeHeaderText', title);
+    }
+  },
   // strict: debug
 });

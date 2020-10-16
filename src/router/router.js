@@ -25,10 +25,11 @@ const ifAuthenticated = (to, from, next) => {
 }
 
 let router = new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'index',
       component: Index,
     },
     {

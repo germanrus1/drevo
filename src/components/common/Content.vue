@@ -2,7 +2,7 @@
     <b-container>
         <b-row>
             <b-col lg="10" offset-lg="1" sm="12" offset-sm="0">
-                <h1>{{headerText}}</h1>
+                <h1>{{this.$store.getters.getPageTitle}}</h1>
                 <keep-alive>
                     <router-view>
                     </router-view>
@@ -17,7 +17,7 @@
     name: "Content",
     data() {
       return {
-        headerText: 'Заголовок страницы',
+
       }
     },
     methods: {

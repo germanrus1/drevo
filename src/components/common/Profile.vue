@@ -42,7 +42,7 @@
         user: {
           email: '',
           // login: '',
-          name: '',
+          name: 'Авторизуйтесь',
           lastName: '',
         },
       }
@@ -88,6 +88,9 @@
     },
     created() {
       this.get();
-    }
+    },
+    mounted() {
+      this.$store.dispatch('changeHeaderText', this.user.name);
+    },
   }
 </script>

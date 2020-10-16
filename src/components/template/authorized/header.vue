@@ -2,9 +2,10 @@
     <div id="wrapper">
         <Sidebar/>
         <div id="content-wrapper" class="d-flex flex-column">
+            <loadStatus ref="loadComponent"/>
             <b-navbar toggleable="sm" type="dark" variant="dark">
                 <b-navbar-brand href="#">
-                    <router-link :to="{name: 'home'}">DREVO</router-link>
+                    <router-link :to="{name: 'index'}">DREVO</router-link>
                 </b-navbar-brand>
 
                 <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -13,19 +14,22 @@
                     <b-navbar-nav>
                         <b-nav-item href="file:///C:/Project/startbootstrap-sb-admin-2-gh-pages/blank.html">URL Шаблона</b-nav-item>
                         <b-nav-item href="#" disabled>Disabled</b-nav-item>
+                        <b-nav-item href="#" v-on:click="showProgressStatus()">Progress</b-nav-item>
                     </b-navbar-nav>
                     <!-- Right aligned nav items -->
                     <b-navbar-nav class="ml-auto">
-                        <b-nav-item-dropdown right>
+                        <b-dropdown right split
+                                    split-variant="default"
+                                    variant="info">
                             <!-- Using 'button-content' slot -->
                             <template v-slot:button-content>
-                                <em>{{user.name}}</em>
+                                <em><router-link :to="{name: 'profile'}">{{user.name}}</router-link></em>
                             </template>
                             <b-dropdown-item href="#">
-                                <router-link :to="{name: 'profile'}">Профиль</router-link>
+                                <router-link :to="{name: 'profile'}">Личный кабинет</router-link>
                             </b-dropdown-item>
                             <b-dropdown-item href="#">Выйти</b-dropdown-item>
-                        </b-nav-item-dropdown>
+                        </b-dropdown>
                     </b-navbar-nav>
                 </b-collapse>
             </b-navbar>
@@ -39,6 +43,7 @@
   import {AUTH_LOGOUT} from "../../../store/actions/auth";
   import Sidebar from "./sidebar";
   import axios from "axios";
+  import loadStatus from "../../common/loadStatus";
 
   export default {
     data() {
@@ -46,15 +51,19 @@
         user: {
           email: '',
           login: '',
-          name: '',
+          name: 'Тестовый пользователь',
           last_name: '',
         },
       }
     },
     components: {
-      Sidebar
+      Sidebar,
+      loadStatus,
     },
     methods: {
+      showProgressStatus: function () {
+        this.$refs.loadComponent.showProgressStatus();
+      },
       logout() {
         this.$store.dispatch(AUTH_LOGOUT)
                 .then(() => {
@@ -80,6 +89,7 @@
     },
     created() {
       this.getUser();
+      this.pageTitle = 'Добро пожаловать';
     }
   }
 </script>

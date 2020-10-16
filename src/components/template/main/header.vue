@@ -1,12 +1,9 @@
 <template>
   <div>
-    <b-progress :value="progressStatus.value" :variant="'danger'"
-                class="progress-status"
-                v-bind:class="{active: progressStatus.isActive}"
-    ></b-progress>
+    <loadStatus ref="loadComponent"/>
     <b-navbar toggleable="sm" type="dark" variant="dark">
       <b-navbar-brand href="#">
-        <router-link :to="{name: 'home'}">DREVO - ЗАГЛУШКА!!!!</router-link>
+        <router-link :to="{name: 'index'}">DREVO - ЗАГЛУШКА!!!!</router-link>
       </b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -40,6 +37,7 @@
   import 'bootstrap-vue/dist/bootstrap-vue.css'
   import {AUTH_LOGOUT} from "../../../store/actions/auth";
   import store from "../../../store";
+  import loadStatus from "../../common/loadStatus";
 
   export default {
     data() {
@@ -58,6 +56,7 @@
       }
     },
     components: {
+      loadStatus,
     },
     methods: {
       logout() {
@@ -66,39 +65,13 @@
                   this.$router.push('/')
                 })
       },
-      // вынести в общий модуль
       showProgressStatus() {
-        this.progressStatus.value = 0;
-        this.progressStatus.isActive = true;
-        console.log(this.progressStatus.isActive);
-
-        let progressStatus = setInterval(() => {
-          this.progressStatus.value += 10;
-
-          if (this.progressStatus.value > 300) {
-            // создать небольшую задержку
-            this.progressStatus.isActive = false;
-            this.progressStatus.value = 0;
-            clearInterval(progressStatus);
-          }
-
-        }, 60);
-
-      }
+        this.$refs.loadComponent.showProgressStatus();
+      },
     },
     created() {
     }
   }
 </script>
 <style>
-  .progress-status {
-    width: 100%;
-    height: 5px;
-    visibility: hidden;
-    transition: visibility .3s;
-  }
-  .progress-status.active{
-    visibility: visible;
-  }
-
 </style>
