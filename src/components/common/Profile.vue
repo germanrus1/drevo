@@ -9,7 +9,7 @@
                     <b-img v-bind="avatarProps" rounded="top"
                            v-bind:src="user.avatar_url"
                     ></b-img>
-                    <b-form @submit="sendFile">
+                    <b-form @submit="updateAvatar">
                         <b-form-file
                                 v-model="avatarFile"
                                 :state="Boolean(avatarFile)"
@@ -126,15 +126,14 @@
         console.log('handleFileUpload');
         console.log(this.avatarFile);
       },
-      sendFile: function (evt) {
+      updateAvatar: function (evt) {
         evt.preventDefault()
-        console.log('try sendfile');
         let formData = new FormData();
 
-        formData.append('file', this.avatarFile);
+        formData.append('avatarFIle', this.avatarFile);
 
         this.$store.dispatch(USER_UPLOAD_AVATAR, formData);
-
+        this.get();
       },
       get: function () {
         axios({url: 'http://derevo.loc/api/user/1', data: {}, method: 'get'})
@@ -148,15 +147,15 @@
             user.id = data.id;
             user.login = data.login;
             user.age = data.age;
-            // user.avatar_url = data.avatar_url;
+            user.avatar_url = process.env.VUE_APP_API_URL + '/upload' + data.avatar_url;
             user.telephone = data.telephone;
             user.gender = data.gender;
             user.description = data.description;
             this.$store.dispatch('changeHeaderText', user.name);
+            this.makeToast('Информация обновлена', 'Обновлено', 'info');
           })
           .catch(err => {
-            console.log('Ошибка при получении данных пользователя');
-            console.log(err);
+            this.makeToast(err.response.data.message, 'Ошибка', 'danger');
           })
       },
       update: function () {
@@ -171,12 +170,11 @@
             user.email = data.email;
             user.last_name = data.last_name;
             user.name = data.name;
-            this.makeToast('Успешно сработало. Сохранено',
-              'Уведобление', 'success')
+            this.makeToast('Сохранение данных прошло успешно', 'Сохранени', 'success')
           })
           .catch(err => {
             this.makeToast(err.response.data.message,
-              'Ошибка!', 'danger');
+              'Ошибка', 'danger');
           })
       },
     },

@@ -26,7 +26,7 @@
                             <b-dropdown-item href="#">
                                 <router-link :to="{name: 'profile'}">Личный кабинет</router-link>
                             </b-dropdown-item>
-                            <b-dropdown-item href="#">Выйти</b-dropdown-item>
+                            <b-dropdown-item href="#" v-on:click="logout">Выйти</b-dropdown-item>
                         </b-dropdown>
                     </b-navbar-nav>
                 </b-collapse>

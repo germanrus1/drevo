@@ -25,23 +25,21 @@ const actions = {
       });
   },
   [USER_UPLOAD_AVATAR]: (context, file) => {
-    console.log('testuser');
-    console.log(file);
     axios({
-      url: 'http://derevo.loc/api/user/' + 1,
-      method: 'put',
+      url: 'http://derevo.loc/api/user',
+      method: 'post',
       data: file,
       headers: {
         'Content-Type': 'multipart/form-data',
-        'Access-Control-Allow-Origin': '*',
-      }
+        // 'Access-Control-Allow-Origin': '*',
+      },
     })
       .then(resp => {
-        let data = resp.data.data;
-        console.log("Файл загружен успешно");
-        console.log(data);
+        console.log('К серверу достучался');
+        console.log(resp.data.data.path);
       })
       .catch(err => {
+        this.makeToast('Не удалось получить доступ к серверу', 'Сохранено', 'success');
         console.log('Ошибка при сохранении данных');
         console.log(err);
       })

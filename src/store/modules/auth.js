@@ -45,7 +45,6 @@ const actions = {
     return new Promise((resolve) => {
       commit(AUTH_LOGOUT)
       localStorage.removeItem('user-token')
-      // remove the axios default header
       delete axios.defaults.headers.common['Authorization']
       resolve()
     })
