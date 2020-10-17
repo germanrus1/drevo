@@ -2,7 +2,7 @@
     <b-container>
         <b-card no-body>
             <b-tabs v-model="tabIndex" card>
-                <img src="https://sun9-55.userapi.com/c616821/v616821043/18473/d17qTVusFqY.jpg">
+                <b-img src="https://sun9-55.userapi.com/c616821/v616821043/18473/d17qTVusFqY.jpg"></b-img>
             </b-tabs>
         </b-card>
     </b-container>

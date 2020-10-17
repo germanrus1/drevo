@@ -18,12 +18,11 @@
       }
     },
     methods: {
-      // âûíåñòè â îáùèé ìîäóëü
+      // Ð²Ñ‹Ð½ÐµÑÑ‚Ð¸ Ð² Ð¾Ð±Ñ‰Ð¸Ð¹ Ð¼Ð¾Ð´ÑƒÐ»ÑŒ
       showProgressStatus() {
         this.progressStatus.isActive = true;
         let progressStatus = setInterval(() => {
             this.progressStatus.isActive = false;
-            console.log(this.progressStatus.isActive);
             clearInterval(progressStatus);
         }, 1500);
       }
@@ -34,7 +33,7 @@
 <style>
     .progress-status {
         width: 100%;
-        height: 2px;
+        height: 4px;
         opacity: 0;
         transition: opacity .1s;
     }

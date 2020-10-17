@@ -11,7 +11,7 @@
                   v-model="username"
                   type="email"
                   required
-                  value="test5@qwe.ru"
+                  value=""
                   placeholder="Введите email"
           ></b-form-input>
         </b-form-group>
@@ -20,9 +20,9 @@
           <b-form-input
                   id="input-2"
                   v-model="password"
-                  value="123123"
+                  value=""
                   required
-                  placeholder="Пароль"
+                  placeholder="Введите пароль"
           ></b-form-input>
         </b-form-group>
 
@@ -35,32 +35,37 @@
 </template>
 
 <script>
-  import { AUTH_REQUEST } from "../../store/actions/auth";
+  import {AUTH_REQUEST} from "../../store/actions/auth";
 
   export default {
-  data() {
-    return {
-      form: {
-        email: '',
+    data() {
+      return {
+        form: {
+          email: '',
+          password: '',
+        },
+        username: '',
         password: '',
-      },
-      username: '',
-      password: '',
-    }
-  },
-  methods: {
-    login: function() {
-      const { username, password } = this;
-      this.$store.dispatch(AUTH_REQUEST, {
-        password,
-        username, // для laravel/passport надо передавать параметр username - это только как идентификатор.
-        grant_type: "password",
-        client_id: 3,
-        client_secret: "tczRF6HdDp8J3W5sCDILZiSNmwUuHQcENCoxebda"
-      }).then(() => {
-        this.$router.push("/profile/");
-      });
-    }
+      }
+    },
+    methods: {
+      /**
+       * в Laravel сгенерировать passport:install
+       * здесь добавить Client ID: 6
+       Client secret: hb3w9LLZ5ceRFin3RAcrvGDHXhAom5rUpvdx4jcd
+       */
+      login: function () {
+        const {username, password} = this;
+        this.$store.dispatch(AUTH_REQUEST, { // Методу передает массив данных
+          password,
+          username, // для laravel/passport надо передавать параметр username - это только как идентификатор.
+          grant_type: "password",
+          client_id: 6,
+          client_secret: "hb3w9LLZ5ceRFin3RAcrvGDHXhAom5rUpvdx4jcd"
+        }).then(() => {
+          this.$router.push("/profile/");
+        });
+      }
+    },
   }
-}
 </script>

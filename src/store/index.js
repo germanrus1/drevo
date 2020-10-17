@@ -6,7 +6,7 @@ import auth from "./modules/auth";
 Vue.use(Vuex);
 
 // const debug = process.env.NODE_ENV !== "production";
-const backendUrl = 'http://derevo.log/api/';
+const backendUrl = 'http://derevo.loc/api/';
 
 export default new Vuex.Store({
   modules: {
@@ -17,10 +17,10 @@ export default new Vuex.Store({
   // Возможно нужно вынести в отдельный модуль
   state: {
     pageTitle: 'Заголовок страницы',
+    apiUrl: process.env.VUE_APP_API_URL,
   },
   mutations: {
     changeHeaderText(state, title = 'Пустой заголовок') {
-      console.log(title);
       state.pageTitle = title;
     }
   },

@@ -1,5 +1,5 @@
-import { USER_REQUEST, USER_ERROR, USER_SUCCESS } from "../actions/user";
-// import axios from "axios";
+import { USER_REQUEST, USER_ERROR, USER_SUCCESS, USER_UPLOAD_AVATAR } from "../actions/user";
+import axios from "axios";
 import Vue from "vue";
 import { AUTH_LOGOUT,/* AUTH_SUCCESS, AUTH_ERROR */} from "../actions/auth";
 import apiCall from "../../utils/api";
@@ -24,18 +24,28 @@ const actions = {
         dispatch(AUTH_LOGOUT);
       });
   },
-  // [USER_PROFILE]: ({ commit, dispatch }) => {
-  //   commit(USER_PROFILE);
-  //   apiCall({ url: "user/me" })
-  //     .then(resp => {
-  //       commit(USER_SUCCESS, resp);
-  //     })
-  //     .catch(() => {
-  //       commit(USER_ERROR);
-  //       // if resp is unauthorized, logout, to
-  //       dispatch(AUTH_LOGOUT);
-  //     });
-  // },
+  [USER_UPLOAD_AVATAR]: (context, file) => {
+    console.log('testuser');
+    console.log(file);
+    axios({
+      url: 'http://derevo.loc/api/user/' + 1,
+      method: 'put',
+      data: file,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Access-Control-Allow-Origin': '*',
+      }
+    })
+      .then(resp => {
+        let data = resp.data.data;
+        console.log("Файл загружен успешно");
+        console.log(data);
+      })
+      .catch(err => {
+        console.log('Ошибка при сохранении данных');
+        console.log(err);
+      })
+  },
 };
 
 const mutations = {

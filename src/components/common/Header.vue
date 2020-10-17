@@ -4,6 +4,8 @@
 </template>
 
 <script>
+  import 'bootstrap/dist/css/bootstrap.css'
+  import 'bootstrap-vue/dist/bootstrap-vue.css'
   import HeaderAuth from '../../components/template/authorized/header'
   import HeaderMain from '../../components/template/main/header'
   import store from '../../store/index'

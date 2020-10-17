@@ -16,12 +16,10 @@
                         <b-nav-item href="#" disabled>Disabled</b-nav-item>
                         <b-nav-item href="#" v-on:click="showProgressStatus()">Progress</b-nav-item>
                     </b-navbar-nav>
-                    <!-- Right aligned nav items -->
                     <b-navbar-nav class="ml-auto">
                         <b-dropdown right split
                                     split-variant="default"
                                     variant="info">
-                            <!-- Using 'button-content' slot -->
                             <template v-slot:button-content>
                                 <em><router-link :to="{name: 'profile'}">{{user.name}}</router-link></em>
                             </template>
@@ -38,8 +36,6 @@
 </template>
 
 <script>
-  import 'bootstrap/dist/css/bootstrap.css'
-  import 'bootstrap-vue/dist/bootstrap-vue.css'
   import {AUTH_LOGOUT} from "../../../store/actions/auth";
   import Sidebar from "./sidebar";
   import axios from "axios";
@@ -72,7 +68,7 @@
       },
 
       getUser: function() {
-        axios({url: 'http://derevo.log/api/' + 'main/', data: {}, method: 'get' })
+        axios({url: 'http://derevo.loc/api/' + 'user/', data: {}, method: 'get' })
                 .then(resp => {
                   let user = this.user;
                   let data = resp.data.data;

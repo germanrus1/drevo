@@ -32,11 +32,15 @@ let router = new Router({
       name: 'index',
       component: Index,
     },
+    /**
+     *   Сделать, что бы при клике Войти/Регистрация открывалась соответствующая вкладка
+     */
     {
       path: '/auth/',
       name: 'auth',
       component: RegAuth,
       beforeEnter: ifNotAuthenticated,
+      props: { tabIndex: 0},
     },
     {
       path: '/home/',

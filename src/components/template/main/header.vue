@@ -16,14 +16,17 @@
         </b-navbar-nav>
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
+          <b-nav-item href="#">
+            <router-link :to="{path: '/auth/', params: {tabIndex: 0}}">Войти</router-link>
+          </b-nav-item>
+          <b-nav-item href="#">
+            <router-link :to="{path: '/auth/', params: {tabIndex: 1}}">Регистрация</router-link>
+          </b-nav-item>
+
           <b-nav-item-dropdown right>
-            <!-- Using 'button-content' slot -->
             <template v-slot:button-content>
               <em>{{user.name}}</em>
             </template>
-            <b-dropdown-item href="#">
-              <router-link :to="profileUrl">{{user.login}}</router-link>
-            </b-dropdown-item>
             <b-dropdown-item href="#">Выйти</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
@@ -39,6 +42,9 @@
   import store from "../../../store";
   import loadStatus from "../../common/loadStatus";
 
+  /**
+   *   Сделать, что бы при клике Войти/Регистрация открывалась соответствующая вкладка
+   */
   export default {
     data() {
       return {
