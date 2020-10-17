@@ -22,7 +22,7 @@
     methods: {
       ifAuthenticated() {
         return store.getters.isAuthenticated;
-      }
+      },
     },
     created() {
     }

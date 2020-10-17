@@ -115,6 +115,13 @@
       }
     },
     methods: {
+      makeToast(text = '', title = '', variant = null) {
+        this.$bvToast.toast(text, {
+          title: title,
+          variant: variant || 'default',
+          solid: true
+        })
+      },
       handleFileUpload(){
         console.log('handleFileUpload');
         console.log(this.avatarFile);
@@ -164,10 +171,12 @@
             user.email = data.email;
             user.last_name = data.last_name;
             user.name = data.name;
+            this.makeToast('Успешно сработало. Сохранено',
+              'Уведобление', 'success')
           })
           .catch(err => {
-            console.log('Ошибка при сохранении данных');
-            console.log(err);
+            this.makeToast(err.response.data.message,
+              'Ошибка!', 'danger');
           })
       },
     },
