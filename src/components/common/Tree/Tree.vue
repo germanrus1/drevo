@@ -1,5 +1,6 @@
 <template>
     <b-card bg-variant="light">
+        <Tree_item_form/>
         <template v-slot:header>
             <h4 class="mb-0">Редактор дерева</h4>
         </template>
@@ -21,12 +22,14 @@
 
 <script>
   import Tree_item from "./Tree_item";
+  import Tree_item_form from "./Tree_item_form";
   import Tree_generation from "./Tree_generation";
 
   export default {
     name: "Tree",
     components: {
       Tree_item,
+      Tree_item_form,
       Tree_generation,
     }
   }

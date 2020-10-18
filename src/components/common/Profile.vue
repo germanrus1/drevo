@@ -39,6 +39,7 @@
                     <b-col cols="9">
                         <b-form-input size="sm" v-on:change="update()" v-model="user.login">{{user.login}}</b-form-input>
                     </b-col>
+<!--                    <b-col cols="9">{{user.login}}</b-col>-->
                 </b-row>
                 <hr>
                 <b-row>

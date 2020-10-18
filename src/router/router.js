@@ -5,7 +5,7 @@ import Home from '../components/common/Home'
 import Index from '../components/common/Index'
 import Profile from '../components/common/Profile'
 import RegAuth from "../components/common/RegAuth";
-import Tree from "../components/common/Tree";
+import Tree from "../components/common/Tree/Tree";
 
 Vue.use(Router);
 
