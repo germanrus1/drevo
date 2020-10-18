@@ -7,9 +7,6 @@ import {
 import { USER_REQUEST } from "../actions/user";
 import axios from 'axios'
 
-const domain = 'http://derevo.loc';
-const urlAuth = domain + '/oauth/token';
-
 const state = {
   token: localStorage.getItem('user-token') || '',
   status: '',
@@ -24,7 +21,7 @@ const actions = {
   [AUTH_REQUEST]: ({commit, dispatch}, user) => {
     return new Promise((resolve, reject) => {
       commit(AUTH_REQUEST)
-      axios({url: urlAuth, data: user, method: 'POST' })
+      axios({url: '/oauth/token', data: user, method: 'POST' })
         .then(resp => {
           const token = resp.data.token_type + ' ' + resp.data.access_token;
           localStorage.setItem('user-token', token);

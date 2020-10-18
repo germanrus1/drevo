@@ -92,7 +92,7 @@
       onSubmit(evt) {
         evt.preventDefault();
         axios
-          .post('http://derevo.loc/api/register', {
+          .post('/api/register', {
             email: this.form.email,
             login: this.form.login,
             name: this.form.name,

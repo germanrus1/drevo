@@ -21,7 +21,18 @@
                                     split-variant="default"
                                     variant="info">
                             <template v-slot:button-content>
-                                <em><router-link :to="{name: 'profile'}">{{user.name}}</router-link></em>
+                                <em>
+                                    <router-link :to="{name: 'profile'}">
+                                        <b-row>
+                                            <b-col class="header__profile_name">
+                                                {{user.name}}
+                                            </b-col>
+                                            <b-col>
+                                                <img height="26" src="http://derevo.loc/system_files/default_avatar_incognito.svg">
+                                            </b-col>
+                                        </b-row>
+                                    </router-link>
+                                </em>
                             </template>
                             <b-dropdown-item href="#">
                                 <router-link :to="{name: 'profile'}">Личный кабинет</router-link>
@@ -47,7 +58,7 @@
         user: {
           email: '',
           login: '',
-          name: 'Тестовый пользователь',
+          name: 'Личный кабинет',
           last_name: '',
         },
       }
@@ -68,13 +79,13 @@
       },
 
       getUser: function() {
-        axios({url: 'http://derevo.loc/api/' + 'user/', data: {}, method: 'get' })
+        axios({url: '/api/' + 'user/', data: {}, method: 'get' })
                 .then(resp => {
                   let user = this.user;
                   let data = resp.data.data;
                   user.email = data.email;
                   user.last_name = data.last_name;
-                  user.name = data.name;
+                  // user.name = data.name;
                   user.id = data.id;
                 })
                 .catch(err => {
@@ -89,5 +100,8 @@
     }
   }
 </script>
-<style>
+<style scoped>
+    .header__profile_name {
+        white-space: nowrap;
+    }
 </style>

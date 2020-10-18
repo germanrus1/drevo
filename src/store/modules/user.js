@@ -26,12 +26,11 @@ const actions = {
   },
   [USER_UPLOAD_AVATAR]: (context, file) => {
     axios({
-      url: 'http://derevo.loc/api/user',
+      url: '/api/user',
       method: 'post',
       data: file,
       headers: {
         'Content-Type': 'multipart/form-data',
-        // 'Access-Control-Allow-Origin': '*',
       },
     })
       .then(resp => {

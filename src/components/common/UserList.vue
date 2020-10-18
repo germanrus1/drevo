@@ -41,7 +41,7 @@
   methods: {
     getUsers() {
       axios
-              .get('http://derevo.loc/api/')
+              .get('/api/')
               .then(response => (this.users = response.data));
     }
   },

@@ -7,7 +7,7 @@
             <b-col lg="5" sm="12">
                 <b-col xs="12">
                     <b-img v-bind="avatarProps" rounded="top"
-                           v-bind:src="user.avatar_url"
+                           v-bind:src="avatar_url"
                     ></b-img>
                     <b-form @submit="updateAvatar">
                         <b-form-file
@@ -96,13 +96,12 @@
         user: {
           email: '',
           login: '',
-          name: 'Авторизуйтесь',
+          name: 'Профиль',
           lastName: '',
           description: '',
           telephone: '',
           age: '',
           gender: '',
-          avatar_url: 'https://sun9-55.userapi.com/c616821/v616821043/18473/d17qTVusFqY.jpg',
         },
         avatarFile: null,
         avatarProps: {
@@ -111,7 +110,8 @@
           class: '',
           fluidGrow: true,
           thumbnail: true,
-        }
+        },
+        avatar_url: 'https://sun9-55.userapi.com/c616821/v616821043/18473/d17qTVusFqY.jpg',
       }
     },
     methods: {
@@ -136,7 +136,7 @@
         this.get();
       },
       get: function () {
-        axios({url: 'http://derevo.loc/api/user/1', data: {}, method: 'get'})
+        axios({url: '/api/user/1', data: {}, method: 'get'})
           .then(resp => {
             let user = this.user;
             let data = resp.data.data;
@@ -147,22 +147,18 @@
             user.id = data.id;
             user.login = data.login;
             user.age = data.age;
-            user.avatar_url = process.env.VUE_APP_API_URL + '/upload' + data.avatar_url;
+            this.avatar_url = 'http://derevo.loc/upload' + data.avatar_url;
             user.telephone = data.telephone;
             user.gender = data.gender;
             user.description = data.description;
-            this.$store.dispatch('changeHeaderText', user.name);
-            this.makeToast('Информация обновлена', 'Обновлено', 'info');
+            this.$store.dispatch('changeHeaderText', user.name + ' ' + user.last_name);
           })
           .catch(err => {
             this.makeToast(err.response.data.message, 'Ошибка', 'danger');
           })
       },
       update: function () {
-        axios({url: 'http://derevo.loc/api/user/' + this.user.id, data: this.user, method: 'put',
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-          }
+        axios({url: '/api/user/' + this.user.id, data: this.user, method: 'put',
         })
           .then(resp => {
             let user = this.user;
@@ -170,7 +166,7 @@
             user.email = data.email;
             user.last_name = data.last_name;
             user.name = data.name;
-            this.makeToast('Сохранение данных прошло успешно', 'Сохранени', 'success')
+            this.makeToast('Информация обновлена', 'Успешно', 'success');
           })
           .catch(err => {
             this.makeToast(err.response.data.message,
@@ -182,7 +178,6 @@
       this.get();
     },
     mounted() {
-      this.$store.dispatch('changeHeaderText', this.user.name);
     },
   }
 </script>

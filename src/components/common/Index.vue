@@ -1,9 +1,11 @@
 <template>
     <b-container>
-        <b-card no-body>
-            <b-tabs v-model="tabIndex" card>
-                <b-img src="https://sun9-55.userapi.com/c616821/v616821043/18473/d17qTVusFqY.jpg"></b-img>
-            </b-tabs>
+        <b-card bg-variant="light">
+            <template v-slot:header>
+                <h4>Привет!</h4>
+            </template>
+            <p><router-link :to="{name: 'auth'}">Авторизуйтесь пожалуйста</router-link> или </p>
+            <p>если у вас все еще нет аккаунта то пройдите <router-link :to="{name: 'auth'}">регистрацию</router-link></p>
         </b-card>
     </b-container>
 </template>
@@ -18,7 +20,6 @@
   export default {
     data() {
       return {
-        tabIndex: 0
       }
     },
     components: {
