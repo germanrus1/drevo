@@ -13,7 +13,7 @@
                 <b-collapse id="nav-collapse" is-nav>
                     <b-navbar-nav>
                         <b-nav-item href="file:///C:/Project/startbootstrap-sb-admin-2-gh-pages/blank.html">URL Шаблона</b-nav-item>
-                        <b-nav-item href="#" disabled>Disabled</b-nav-item>
+                        <b-nav-item href="#" :to="{name: 'tree'}">Редактор дерева</b-nav-item>
                         <b-nav-item href="#" v-on:click="showProgressStatus()">Progress</b-nav-item>
                     </b-navbar-nav>
                     <b-navbar-nav class="ml-auto">

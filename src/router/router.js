@@ -5,6 +5,7 @@ import Home from '../components/common/Home'
 import Index from '../components/common/Index'
 import Profile from '../components/common/Profile'
 import RegAuth from "../components/common/RegAuth";
+import Tree from "../components/common/Tree";
 
 Vue.use(Router);
 
@@ -52,6 +53,12 @@ let router = new Router({
       path: '/profile/',
       name: 'profile',
       component: Profile,
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/Tree/',
+      name: 'tree',
+      component: Tree,
       beforeEnter: ifAuthenticated,
     },
   ]
