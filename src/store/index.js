@@ -2,6 +2,8 @@ import Vue from "vue";
 import Vuex from "vuex";
 import user from "./modules/user";
 import auth from "./modules/auth";
+import treeItemForm from "./modules/treeItemForm";
+import treeForm from "./modules/treeForm";
 
 Vue.use(Vuex);
 
@@ -12,9 +14,11 @@ export default new Vuex.Store({
   modules: {
     user,
     auth,
+    treeItemForm,
+    treeForm,
     backendUrl,
   },
-  // Возможно нужно вынести в отдельный модуль
+  // Нужно вынести в отдельный модуль
   state: {
     pageTitle: 'Заголовок страницы',
     apiUrl: process.env.VUE_APP_API_URL,

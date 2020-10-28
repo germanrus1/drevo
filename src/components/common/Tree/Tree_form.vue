@@ -1,6 +1,6 @@
 <template>
     <b-card v-bind:header="cardHeader">
-        <b-form>
+        <b-form @submit="addTree">
             <div v-for="(field, name, index) in form" v-bind:key="index">
                 <b-form-group
                         v-if="field.show !== false"
@@ -23,9 +23,10 @@
                 </b-form-group>
             </div>
             <b-row class="my-3 justify-content-center">
-                <b-button variant="danger" class="mx-1" v-b-toggle.sidebar__right_tree_item>Отмена</b-button>
+                <b-button variant="danger" class="mx-1" v-b-toggle.sidebar__right_tree>Отмена</b-button>
                 <b-button variant="success"
                           class="mx-1"
+                          type="submit"
                 >
                     Сохранить
                 </b-button>
@@ -43,11 +44,15 @@
       return {
         popoverShow: false,
         cardHeader: 'Добавить человека',
-        form: this.$store.getters.getForm,
-        buttonType: this.$store.getters.getButtonType,
+        form: this.$store.getters.getTreeForm,
+        // buttonType: this.$store.getters.getButtonType, todo доделать
       }
     },
     methods: {
+      addTree(evt) {
+        evt.preventDefault()
+        this.$store.dispatch('createTree', this.form)
+      }
     },
   }
 </script>
