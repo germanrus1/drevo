@@ -38,5 +38,4 @@ export default new Vuex.Store({
       commit('changeHeaderText', title);
     }
   },
-  // strict: debug
 });

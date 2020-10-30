@@ -37,7 +37,7 @@
                 <b-row>
                     <b-col cols="3"><label>Логин</label></b-col>
                     <b-col cols="9">
-                        <b-form-input size="sm" v-on:change="update()" v-model="user.login">{{user.login}}</b-form-input>
+                        <b-form-input size="sm" v-model="user.login">{{user.login}}</b-form-input>
                     </b-col>
 <!--                    <b-col cols="9">{{user.login}}</b-col>-->
                 </b-row>
@@ -45,39 +45,42 @@
                 <b-row>
                     <b-col cols="3"><label>Email</label></b-col>
                     <b-col cols="9">
-                        <b-form-input size="sm" v-on:change="update()" v-model="user.email">{{user.email}}</b-form-input>
+                        <b-form-input size="sm" v-model="user.email">{{user.email}}</b-form-input>
                     </b-col>
                 </b-row>
                 <hr>
                 <b-row>
                     <b-col cols="3"><label>Имя</label></b-col>
                     <b-col cols="9">
-                        <b-form-input size="sm" v-on:change="update()" v-model="user.name">{{user.name}}</b-form-input>
+                        <b-form-input size="sm" v-model="user.name">{{user.name}}</b-form-input>
                     </b-col>
                 </b-row>
                 <hr>
                 <b-row>
                     <b-col cols="3"><label>Фамилия</label></b-col>
                     <b-col cols="9">
-                        <b-form-input size="sm" v-on:change="update()" v-model="user.last_name">{{user.last_name}}</b-form-input>
+                        <b-form-input size="sm" v-model="user.last_name">{{user.last_name}}</b-form-input>
                     </b-col>
                 </b-row>
                 <hr>
                 <b-row>
                     <b-col cols="3"><label>Телефон</label></b-col>
                     <b-col cols="9">
-                        <b-form-input size="sm" v-on:change="update()" v-model="user.telephone">{{user.telephone}}</b-form-input>
+                        <b-form-input size="sm" v-model="user.telephone">{{user.telephone}}</b-form-input>
                     </b-col>
                 </b-row>
                 <hr>
                 <b-row>
                     <b-col cols="3"><label>О себе</label></b-col>
                     <b-col cols="9">
-                        <b-form-input size="sm" v-on:change="update()" v-model="user.description">{{user.description}}</b-form-input>
+                        <b-form-input size="sm" v-model="user.description">{{user.description}}</b-form-input>
                     </b-col>
                 </b-row>
                 <hr>
                 <b-row class="justify-content-md-center">
+                    <b-button variant="success" v-on:click="update()">
+                        Сохранить
+                    </b-button>
                     <b-button variant="primary" v-on:click="get()">
                         Обновить данные
                     </b-button>

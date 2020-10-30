@@ -1,6 +1,6 @@
 <template>
     <b-card v-bind:header="cardHeader">
-        <b-form @submit="addTree">
+        <b-form @submit="changeTree">
             <div v-for="(field, name, index) in form" v-bind:key="index">
                 <b-form-group
                         v-if="field.show !== false"
@@ -24,11 +24,12 @@
             </div>
             <b-row class="my-3 justify-content-center">
                 <b-button variant="danger" class="mx-1" v-b-toggle.sidebar__right_tree>Отмена</b-button>
-                <b-button variant="success"
+                <b-button v-bind:variant="buttonType"
                           class="mx-1"
                           type="submit"
+                          v-on:click="changeTree"
                 >
-                    Сохранить
+                    {{(buttonType == 'success') ? 'Сохранить' : 'Добавить'}}
                 </b-button>
             </b-row>
         </b-form>
@@ -43,17 +44,32 @@
     data() {
       return {
         popoverShow: false,
-        cardHeader: 'Добавить человека',
         form: this.$store.getters.getTreeForm,
-        // buttonType: this.$store.getters.getButtonType, todo доделать
       }
     },
     methods: {
-      addTree(evt) {
+      changeTree(evt) {
         evt.preventDefault()
-        this.$store.dispatch('createTree', this.form)
+
+        // присваивание полям с undefined пустые значения, что бы на сервер тоже отправлялись
+        for (var prop in this.form) {
+          this.form[prop].value = (this.form[prop].value === undefined) ? '' : this.form[prop].value;
+        }
+        if (this.form.id.value) {
+          this.$store.dispatch('updateTree', {form: this.form})
+        } else {
+          this.$store.dispatch('createTree', {form: this.form})
+        }
       }
     },
+    computed: {
+      buttonType: function () {
+        return this.$store.getters.getTypeChange == 'update' ? 'success' : 'primary'
+      },
+      cardHeader: function () {
+        return this.$store.getters.getTypeChange == 'update' ? 'Редактировать дерево' : 'Добавить дерево'
+      },
+    }
   }
 </script>
 

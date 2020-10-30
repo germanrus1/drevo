@@ -1,6 +1,6 @@
 <template>
-    <b-card v-bind:header="cardHeader">
-        <b-form>
+    <b-card v-bind:header="this.cardHeader">
+        <b-form @submit="changeTreeItem">
             <div v-for="(field, name, index) in form" v-bind:key="index">
                 <b-form-group
                         v-if="field.show !== false"
@@ -24,10 +24,11 @@
             </div>
             <b-row class="my-3 justify-content-center">
                 <b-button variant="danger" class="mx-1" v-b-toggle.sidebar__right_tree_item>Отмена</b-button>
-                <b-button variant="success"
+                <b-button v-bind:variant="buttonType"
                           class="mx-1"
+                          type="submit"
                 >
-                    Сохранить
+                    {{(buttonType == 'success') ? 'Сохранить' : 'Добавить'}}
                 </b-button>
             </b-row>
         </b-form>
@@ -39,16 +40,39 @@
 
   export default {
     name: "Tree_item_form",
+    props: {
+      treeId: Number,
+    },
     data() {
       return {
         popoverShow: false,
-        cardHeader: 'Добавить человека',
         form: this.$store.getters.getForm,
-        buttonType: this.$store.getters.getButtonType,
       }
     },
     methods: {
+      changeTreeItem(evt) {
+        evt.preventDefault()
+
+        // присваивание полям с undefined пустые значения, что бы на сервер тоже отправлялись
+        for (var prop in this.form) {
+          this.form[prop].value = (this.form[prop].value === undefined) ? '' : this.form[prop].value;
+        }
+        if (this.form.id) {
+          this.$store.dispatch('updateTreeItem', {form: this.form, id: this.form.id})
+        } else {
+          this.$store.dispatch('createTreeItem', {form: this.form, tree_id: this.treeId})
+
+        }
+      }
     },
+    computed: {
+      buttonType: function () {
+        return this.$store.getters.getTypeChange == 'update' ? 'success' : 'primary'
+      },
+      cardHeader: function () {
+        return this.$store.getters.getTypeChange == 'update' ? 'Изменить данные' : 'Добавить человека'
+      },
+    }
   }
 </script>
 

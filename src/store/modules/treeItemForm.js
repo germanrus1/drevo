@@ -1,7 +1,13 @@
+import axios from "axios";
 
 const state = {
-  buttonType: 'create', // todo надо доделать или удалить
+  typeChange: 'create',
   form: {
+    id: {
+      label: 'Id',
+      value: '',
+      show: false,
+    },
     name: {
       label: 'Имя',
       value: '',
@@ -61,24 +67,80 @@ const getters = {
   getForm: state => {
     return state.form;
   },
-  getButtonType: state => {
-    return state.buttonType;
+  getTypeChange: state => {
+    return state.typeChange;
   },
 }
 
 const actions = {
   setForm: ({commit}, form) => {
     commit('setForm', form)
-  }
+  },
+  setTypeChange: ({state}, type) => {
+    state.typeChange = type;
+  },
+  createTreeItem: (context, treeItemForm) => {
+    axios({
+      url: '/api/treeItem/',
+      method: 'post',
+      data: {
+        tree_id: treeItemForm.tree_id,
+        name: treeItemForm.form.name.value,
+        last_name: treeItemForm.form.last_name.value,
+        data_of_birth: treeItemForm.form.data_of_birth.value,
+        data_of_death: treeItemForm.form.data_of_death.value,
+        gender: treeItemForm.form.gender.value,
+        father_parent_id: treeItemForm.form.father_parent_id.value,
+        mother_parent_id: treeItemForm.form.mother_parent_id.value,
+        description: treeItemForm.form.description.value,
+        avatar_url: treeItemForm.form.avatar_url.value,
+        adopted: undefined,
+      }
+    })
+      .then(resp => {
+        let data = resp.data.data;
+        console.log(data.message);
+        // this.makeToast(data.message, 'Ошибка', 'success');
+      })
+      .catch(err => {
+        console.log(err.response.data.message);
+        // this.makeToast(err.response.data.message, 'Ошибка', 'danger');
+    })
+  },
+  updateTreeItem: (context, treeItemForm) => {
+    axios({
+      url: '/api/treeItem/' + treeItemForm.form.id.value,
+      method: 'put',
+      data: {
+        name: treeItemForm.form.name.value,
+        last_name: treeItemForm.form.last_name.value,
+        data_of_birth: treeItemForm.form.data_of_birth.value,
+        data_of_death: treeItemForm.form.data_of_death.value,
+        gender: treeItemForm.form.gender.value,
+        father_parent_id: treeItemForm.form.father_parent_id.value,
+        mother_parent_id: treeItemForm.form.mother_parent_id.value,
+        description: treeItemForm.form.description.value,
+        avatar_url: treeItemForm.form.avatar_url.value,
+        adopted: undefined,
+      }
+    })
+      .then(resp => {
+        let data = resp.data.data;
+        console.log(data.message);
+        // this.makeToast(data.message, 'Ошибка', 'success');
+      })
+      .catch(err => {
+        console.log(err.response.data.message);
+        // this.makeToast(err.response.data.message, 'Ошибка', 'danger');
+    })
+  },
 };
 
 const mutations = {
   setForm: (state, form) => {
-    state.buttonType = 'update'
 
     if (!form) {
       form = {}
-      state.buttonType = 'create'
     }
 
     let keys = Object.keys(state.form)

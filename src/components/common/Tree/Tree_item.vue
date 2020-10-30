@@ -76,14 +76,17 @@
       setFormParams(type) {
         let data = {};
 
-        if (type == 'parent') {
+        if (type == 'self') {
+          this.$store.dispatch('setTypeChange', 'update');
+          data = this.form;
+        } else {
+
+          this.$store.dispatch('setTypeChange', 'create');
           if (this.form.gender === 0) {
             data.father_parent_id = this.form.id
           } else {
             data.mother_parent_id = this.form.id
           }
-        } else if (type == 'self') {
-          data = this.form;
         }
 
         this.$store.dispatch('setForm', data)
